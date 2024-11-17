@@ -1,0 +1,53 @@
+﻿@using System.Reflection
+@using BlazorAdmin.Kernel.Components.Layout
+@using Microsoft.AspNetCore.Components.Authorization 
+@using Console = System.Console 
+@using BlazorAdmin.Kernel.Components.Pages
+
+@inject NavigationManager navigationManager
+<BootstrapBlazorRoot>
+    <CascadingAuthenticationState>
+        <Router AppAssembly="typeof(Program).Assembly" AdditionalAssemblies="[..Shared.GlobalApp.AdditionalAssemblies]" OnNavigateAsync="OnNavigateAsync">
+        <Found Context="routeData">
+            <CascadingValue Value="User" IsFixed="true"> 
+                <AuthorizeView>
+                    <Authorized>
+                        <RouteView RouteData="routeData" DefaultLayout="typeof(MainLayout)"/>
+                    </Authorized>
+                    <NotAuthorized>
+                        <Login/>
+                    </NotAuthorized>
+                </AuthorizeView> 
+            </CascadingValue>
+        </Found>
+        <NotFound>
+            <LayoutView Layout="@typeof(EmptyLayout)">
+                <p>Sorry, there's nothing at this address.</p>
+            </LayoutView>
+        </NotFound>
+    </Router>
+    </CascadingAuthenticationState>
+</BootstrapBlazorRoot>
+
+@code{
+
+    private Object User = new { name = "admin" };
+ 
+ 
+    private void OnNavigateAsync(NavigationContext args)
+    {
+        try
+        {
+            if (args.Path.ToLower().StartsWith("login"))
+            {
+                navigationManager.NavigateTo("/");
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e); 
+        }
+        
+    }
+
+}

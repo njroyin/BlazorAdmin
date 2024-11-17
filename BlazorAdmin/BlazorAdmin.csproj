@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings> 
+<!--        <CopyRefAssembliesToPublishDirectory>true</CopyRefAssembliesToPublishDirectory>-->
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.1"/>
+        <PackageReference Include="System.Drawing.Common" Version="9.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Components\Layout\EmptyLayout.razor" />
+      <_ContentIncludedByDefault Remove="Components\Layout\MainLayout.razor" />
+      <_ContentIncludedByDefault Remove="Components\Layout\Widget.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\BlazorAdmin.Kernel\BlazorAdmin.Kernel.csproj" />
+      <ProjectReference Include="..\BlazorAdmin.Shared\BlazorAdmin.Shared.csproj" />
+    </ItemGroup>
+
+
+</Project>

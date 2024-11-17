@@ -1,0 +1,88 @@
+﻿@page "/login"
+@using System.ComponentModel.DataAnnotations 
+@using System.Diagnostics.CodeAnalysis
+@using BlazorAdmin.Shared.Authentication
+@using Microsoft.AspNetCore.Authorization 
+@using Console = System.Console
+
+@inject ShareAuthenticationStateProvider _authenticationStateProvider
+@inject NavigationManager _navigationManager
+@inject MessageService _messageService
+
+@attribute [AllowAnonymous]
+<div class="d-flex flex-column app-layout-login ">
+    <div class="flex-fill  login-layout app-login-back-@bgnumber">
+        <header class="login-header">
+            <img src="/images/logo.png" alt="" height="48">
+        </header>
+        <div class="login-content">
+            <div class="login-form">
+                <h1>WTMApp</h1> 
+                <ValidateForm Model="@Model" FormName="Login" OnValidSubmit="@ValidSubmit"  >
+                    <BootstrapInput @bind-Value="@Model.ITCode" ShowLabelTooltip="true"  />
+                    <BootstrapPassword @bind-Value="@Model.Password"    ShowLabelTooltip="true" />
+                    <Button ButtonType="ButtonType.Submit" Text="登录" style="width:100%;margin-top:20px;" IsAsync="true" />
+                </ValidateForm>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+    
+    [Inject]
+    [NotNull]
+    private MessageService? messageService { get; set; }
+    private int bgnumber;
+    private LoginVM Model = new LoginVM(){ITCode = string.Empty,Password = string.Empty}; 
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        bgnumber = new Random().Next(1, 6);   
+    }
+
+     
+
+    private async Task ValidSubmit(EditContext context)
+    {
+        await Task.Run(() =>
+        {  
+            try
+            {
+                _authenticationStateProvider.FakedSignIn(Model.ITCode,Model.Password);
+                _navigationManager.NavigateTo("/");
+            }
+            catch (Exception ex)
+            {
+                Console.Error.Write(ex);
+                _messageService.Show(new MessageOption()
+                {
+                    Color = Color.Danger,
+                    Content = ex.Message
+                });
+            }
+
+           
+
+        });
+    }
+
+
+    class LoginVM
+    {
+        [Display(Name = "登录名称")]
+        [Required(ErrorMessage = "{0}不能为空")]
+        public required string ITCode { get; set; }
+
+        [Required(ErrorMessage = "{0}不能为空")]
+        [MinLength(8, ErrorMessage = "{0}不能小于{1}")]
+        [Display(Name = "登录密码")]
+        public required string Password { get; set; }
+    }
+
+
+
+}
