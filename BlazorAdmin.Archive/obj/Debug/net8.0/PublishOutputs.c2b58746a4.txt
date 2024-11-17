@@ -1,2 +1,0 @@
-/Users/luoyin/Documents/RiderProjects/BlazorAdmin/BlazorAdmin/bin/Debug/net8.0/emcc-props.json
-/Users/luoyin/Documents/RiderProjects/BlazorAdmin/BlazorAdmin/bin/Debug/net8.0/web.config
