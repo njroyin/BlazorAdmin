@@ -9,7 +9,7 @@
         <OutputType>Exe</OutputType>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <OutputPath>bin\Debug/</OutputPath>
+      <OutputPath>/Users/luoyin/Documents/RiderProjects/BlazorAdmin/BlazorAdmin/bin/Debug</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>
@@ -34,6 +34,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\BlazorAdmin.Models\BlazorAdmin.Models.csproj" />
       <ProjectReference Include="..\BlazorAdmin.Shared\BlazorAdmin.Shared.csproj" />
     </ItemGroup>
 

@@ -1,10 +1,9 @@
-﻿@using System.Reflection
-@using BlazorAdmin.Kernel.Components.Layout
+﻿@using BlazorAdmin.Kernel.Components.Layout
 @using Microsoft.AspNetCore.Components.Authorization 
 @using Console = System.Console 
 @using BlazorAdmin.Kernel.Components.Pages
 
-@inject NavigationManager navigationManager
+@inject NavigationManager _navigationManager
 <BootstrapBlazorRoot>
     <CascadingAuthenticationState>
         <Router AppAssembly="typeof(Program).Assembly" AdditionalAssemblies="[..Shared.GlobalApp.AdditionalAssemblies]" OnNavigateAsync="OnNavigateAsync">
@@ -40,7 +39,7 @@
         {
             if (args.Path.ToLower().StartsWith("login"))
             {
-                navigationManager.NavigateTo("/");
+                _navigationManager.NavigateTo("/");
             }
         }
         catch (Exception e)

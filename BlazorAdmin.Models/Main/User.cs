@@ -1,7 +1,7 @@
 ﻿using FreeSql.DataAnnotations;
 using Newtonsoft.Json; 
 
-namespace BlazorAdmin.Platform.Models {
+namespace BlazorAdmin.Models.Main {
 
 	[JsonObject(MemberSerialization.OptIn), Table(DisableSyncStructure = true)]
 	public partial class User {

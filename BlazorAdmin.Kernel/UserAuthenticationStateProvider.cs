@@ -1,24 +1,24 @@
+using BlazorAdmin.Models.DbFlags;
+using BlazorAdmin.Models.Main;
 using BlazorAdmin.Shared;
-using BlazorAdmin.Platform.Models;
 using BlazorAdmin.Shared.Authentication;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Components.Authorization;
 
-namespace BlazorAdmin.Platform;
+namespace BlazorAdmin.Kernel;
  
 /// <summary>
 /// 权限认证
 /// </summary>
-public class UserAuthenticationStateProvider : ShareAuthenticationStateProvider
-{
+public class UserAuthenticationStateProvider:ShareAuthenticationStateProvider{
     /// <summary>
     /// 定义访问指定数据连接
     /// </summary>
-    private IFreeSql<DbMainFlag> freeSql = GlobalApp.GetService<IFreeSql<DbMainFlag>>();
+    private IFreeSql<DbMain> freeSql = GlobalApp.GetService<IFreeSql<DbMain>>();
      
  
 
-   // private ClaimsPrincipal FakedUser {
+    // private ClaimsPrincipal FakedUser {
     //     get {
     //         var claims = new[] {
     //             new Claim(ClaimTypes.Name, "john"),
